@@ -1,26 +1,37 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #059669;
+  --color-primary-foreground: #ffffff;
+  
+  --color-accent: #D4AF37;
+  --color-accent-foreground: #ffffff;
+  
+  --color-background: #ffffff;
+  --color-foreground: #1f2937;
+  
+  --color-muted: #f3f4f6;
+  --color-muted-foreground: #6b7280;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Base Styles - Applied globally */
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair), ui-serif, Georgia, serif;
+    font-weight: 700;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Utility class to apply Playfair Display font */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-playfair), ui-serif, Georgia, serif;
+  }
 }
