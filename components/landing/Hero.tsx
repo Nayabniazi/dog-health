@@ -62,19 +62,17 @@ export function Hero() {
           </div>
 
           <div className="relative mx-auto w-full max-w-[600px] lg:max-w-none">
-            {/* LCP Optimization: Standard img tag for immediate render or Next/Image with priority */}
-            <Reveal type="scale" duration={0.8} blur width="100%">
-                <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-100 border border-gray-200 shadow-2xl relative">
-                  <Image 
-                    src="/images/hero-image.jpg"
-                    alt="Veterinario examinando un perro con microscopio"
-                    fill
-                    className="object-cover"
-                    priority
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-            </Reveal>
+            {/* LCP Optimization: Removed Reveal animation to ensure immediate visibility */}
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-100 border border-gray-200 shadow-2xl relative">
+                <Image 
+                src="/images/hero-image.jpg"
+                alt="Veterinario examinando un perro con microscopio"
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                />
+            </div>
 
             {/* Floating Badge */}
             <div className="absolute -bottom-6 -left-6 hidden md:block">

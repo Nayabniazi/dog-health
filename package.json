@@ -8,6 +8,11 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "not dead"
+  ],
   "dependencies": {
     "@next/third-parties": "^16.1.2",
     "clsx": "^2.1.1",

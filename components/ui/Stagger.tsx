@@ -19,6 +19,7 @@ export const Stagger = ({
   viewport = { once: true, margin: "-10%" }
 }: StaggerProps) => {
   const ref = useRef(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isInView = useInView(ref, viewport as any);
 
   const containerVariants: Variants = {
