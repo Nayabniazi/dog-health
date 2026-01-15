@@ -21,6 +21,51 @@ const Authority = dynamic(() => import('@/components/landing/Authority').then(mo
 export default function LandingPage() {
   return (
     <main className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "VeterinaryCare",
+            "name": "Medicina Regenerativa Veterinaria BaDog",
+            "description": "Restaura la movilidad de tu mascota a través de Terapia de Células Madre y PRP sin los riesgos de la cirugía tradicional. Especialistas en León, Guanajuato.",
+            "image": "https://regeneracioncelular.mascotasbadog.com/images/hero-image.jpg",
+            "@id": "https://regeneracioncelular.mascotasbadog.com",
+            "url": "https://regeneracioncelular.mascotasbadog.com",
+            "telephone": "+524772492828",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "León",
+              "addressRegion": "Guanajuato",
+              "addressCountry": "MX"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 21.1221,
+              "longitude": -101.6826
+            },
+            "priceRange": "$$",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "09:00",
+                "closes": "19:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Saturday"],
+                "opens": "09:00",
+                "closes": "14:00"
+              }
+            ],
+            "sameAs": [
+              "https://www.facebook.com/mascotasbadog", 
+              "https://www.instagram.com/mascotasbadog" 
+            ]
+          })
+        }}
+      />
       {/* Critical Path: Loaded Immediately */}
       <Hero />
       <EmpathyMirror />
@@ -33,7 +78,7 @@ export default function LandingPage() {
       <WhatsAppWidget />
       
       {/* Simple Footer */}
-      <footer className="bg-gray-900 border-t border-gray-800 py-12 text-center text-gray-500 text-sm">
+      <footer className="bg-secondary border-t border-white/10 py-12 text-center text-white/60 text-sm">
         <div className="container mx-auto px-4">
           <p>© {new Date().getFullYear()} Medicina Regenerativa Veterinaria BaDog. Todos los derechos reservados.</p>
           <p className="mt-2">Director Médico: Dr. [Nombre] | Cédula #12345</p>

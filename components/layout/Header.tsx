@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -53,10 +54,13 @@ export function Header() {
              window.scrollTo({ top: 0, behavior: 'smooth' });
           }}>
              <div className="relative h-24 w-64 transition-transform group-hover:scale-105">
-                <img 
+                <Image 
                   src="/images/header-logo.png" 
                   alt="Mascotas BaDog Logo" 
-                  className="h-full w-full object-contain object-left"
+                  fill
+                  className="object-contain object-left"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 256px"
                 />
              </div>
           </Link>

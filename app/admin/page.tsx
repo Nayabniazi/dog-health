@@ -96,16 +96,16 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
         className="w-full max-w-sm"
       >
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-900 text-white">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-secondary">
             <ShieldCheck className="h-6 w-6" />
           </div>
-          <h1 className="text-xl font-semibold tracking-tight text-gray-900">Acceso Administrativo</h1>
-          <p className="mt-2 text-sm text-gray-500">Por favor ingresa tus credenciales para continuar.</p>
+          <h1 className="text-xl font-semibold tracking-tight text-white">Acceso Administrativo</h1>
+          <p className="mt-2 text-sm text-white/70">Por favor ingresa tus credenciales para continuar.</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-gray-700">Correo Electrónico</label>
+            <label className="text-xs font-medium text-white">Correo Electrónico</label>
             <div className="relative">
               <Mail className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
               <input
@@ -120,7 +120,7 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-gray-700">Contraseña</label>
+            <label className="text-xs font-medium text-white">Contraseña</label>
             <div className="relative">
               <Lock className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
               <input
@@ -143,7 +143,7 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-gray-900 py-2.5 text-sm font-medium text-white transition-all hover:bg-gray-800 disabled:opacity-70"
+            className="w-full rounded-lg bg-white py-2.5 text-sm font-medium text-secondary transition-all hover:bg-gray-100 disabled:opacity-70"
           >
             {loading ? 'Autenticando...' : 'Iniciar Sesión'}
           </button>
