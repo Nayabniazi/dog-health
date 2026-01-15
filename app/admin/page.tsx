@@ -85,8 +85,11 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white p-4">
+    <div className="flex min-h-screen items-center justify-center bg-secondary p-4">
+      <div className="absolute inset-0 bg-[url('/images/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+      
       <motion.div 
+
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
@@ -197,44 +200,44 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
 
       {/* Sidebar */}
       <aside className={`
-        fixed inset-y-0 left-0 z-30 w-64 transform border-r border-gray-100 bg-white transition-transform duration-200 ease-in-out md:static md:translate-x-0
+        fixed inset-y-0 left-0 z-30 w-64 transform border-r border-white/10 bg-secondary text-white transition-transform duration-200 ease-in-out md:static md:translate-x-0
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="p-6 flex items-center justify-between">
+        <div className="p-6 flex items-center justify-between border-b border-white/10">
           <div className="flex items-center gap-2">
-            <div className="h-6 w-6 rounded bg-gray-900 text-white flex items-center justify-center font-serif text-xs font-bold">L</div>
-            <span className="font-semibold tracking-tight text-gray-900">Admin Veterinaria</span>
+            <div className="h-6 w-6 rounded bg-white text-secondary flex items-center justify-center font-serif text-xs font-bold">B</div>
+            <span className="font-semibold tracking-tight text-white">Admin Veterinaria</span>
           </div>
           <button 
             onClick={() => setIsMobileMenuOpen(false)}
-            className="md:hidden text-gray-500 hover:text-gray-900"
+            className="md:hidden text-white/70 hover:text-white"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
         
-        <nav className="flex-1 px-4 space-y-1">
-          <a href="#" className="flex items-center gap-3 rounded-md bg-gray-50 px-3 py-2 text-sm font-medium text-gray-900">
-            <LayoutDashboard className="h-4 w-4 text-gray-500" />
+        <nav className="flex-1 px-4 space-y-1 mt-4">
+          <a href="#" className="flex items-center gap-3 rounded-md bg-white/10 px-3 py-2 text-sm font-medium text-white">
+            <LayoutDashboard className="h-4 w-4 text-white/70" />
             Panel de Control
           </a>
           <div className="pt-4 pb-2">
-             <div className="px-3 text-[10px] font-semibold uppercase tracking-wider text-gray-400">Configuración</div>
+             <div className="px-3 text-[10px] font-semibold uppercase tracking-wider text-white/40">Configuración</div>
           </div>
-          <button onClick={onLogout} className="w-full flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
-            <LogOut className="h-4 w-4 text-gray-400" />
+          <button onClick={onLogout} className="w-full flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/70 hover:bg-white/10 hover:text-white transition-colors">
+            <LogOut className="h-4 w-4 text-white/70" />
             Cerrar Sesión
           </button>
         </nav>
 
-        <div className="p-4 border-t border-gray-50">
+        <div className="p-4 border-t border-white/10">
            <div className="flex items-center gap-3">
-              <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
-                 <span className="text-xs font-medium text-gray-600">A</span>
+              <div className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-white font-medium text-xs">
+                 A
               </div>
               <div className="flex flex-col overflow-hidden">
-                 <span className="text-xs font-medium text-gray-900 truncate">Administrador</span>
-                 <span className="text-[10px] text-gray-400 truncate">admin@gmail.com</span>
+                 <span className="text-xs font-medium text-white truncate">Administrador</span>
+                 <span className="text-[10px] text-white/50 truncate">admin@gmail.com</span>
               </div>
            </div>
         </div>

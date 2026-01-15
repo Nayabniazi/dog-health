@@ -66,7 +66,7 @@ export function Hero() {
             <Reveal type="scale" duration={0.8} blur width="100%">
                 <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-100 border border-gray-200 shadow-2xl relative">
                   <Image 
-                    src="/images/vet-microscope.jpg"
+                    src="/images/hero-image.jpg"
                     alt="Veterinario examinando un perro con microscopio"
                     fill
                     className="object-cover"

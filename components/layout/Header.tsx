@@ -52,17 +52,13 @@ export function Header() {
              e.preventDefault();
              window.scrollTo({ top: 0, behavior: 'smooth' });
           }}>
-            <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white font-serif font-bold text-xl transition-transform group-hover:scale-110">
-              B
-            </div>
-            <div className={`flex flex-col transition-opacity ${isScrolled ? 'opacity-100' : 'opacity-90'}`}>
-              <span className="text-sm font-bold tracking-tight text-gray-900 leading-none">
-                BADOG
-              </span>
-              <span className="text-[10px] text-gray-500 font-medium tracking-widest uppercase">
-                León, México
-              </span>
-            </div>
+             <div className="relative h-24 w-64 transition-transform group-hover:scale-105">
+                <img 
+                  src="/images/header-logo.png" 
+                  alt="Mascotas BaDog Logo" 
+                  className="h-full w-full object-contain object-left"
+                />
+             </div>
           </Link>
 
           {/* Desktop Navigation */}

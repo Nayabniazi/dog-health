@@ -20,7 +20,7 @@ export async function submitLead(prevState: FormState, formData: FormData): Prom
     if (!name || !whatsapp || !petType || !symptom) {
        return {
         success: false,
-        message: "Please fill in all fields."
+        message: "Por favor completa todos los campos."
       };
     }
 
@@ -37,13 +37,13 @@ export async function submitLead(prevState: FormState, formData: FormData): Prom
 
     return {
       success: true,
-      message: "Request received. A specialist will contact you shortly."
+      message: "Solicitud recibida. Un especialista te contactará en breve."
     };
   } catch (error) {
     console.error("Error submitting lead:", error);
     return {
       success: false,
-      message: "Something went wrong. Please try again."
+      message: "Algo salió mal. Por favor inténtalo de nuevo."
     };
   }
 }

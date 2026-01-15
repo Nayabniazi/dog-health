@@ -9,6 +9,6 @@ export async function GET() {
     return NextResponse.json(consultations);
   } catch (error) {
     console.error("Error fetching consultations:", error);
-    return NextResponse.json({ error: 'Failed to fetch consultations' }, { status: 500 });
+    return NextResponse.json({ error: 'Error al obtener las consultas' }, { status: 500 });
   }
 }

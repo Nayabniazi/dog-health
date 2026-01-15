@@ -4,14 +4,20 @@
   --font-display: var(--font-playfair);
   --font-sans: var(--font-inter);
 
-  --color-primary: #059669;
+  /* Brand Palette from Image */
+  --color-primary: #518b42; /* Forest Green */
   --color-primary-foreground: #ffffff;
   
-  --color-accent: #D4AF37;
+  --color-secondary: #02327b; /* Dark Royal Blue */
+  --color-secondary-foreground: #ffffff;
+
+  --color-accent: #D4AF37; /* Gold */
   --color-accent-foreground: #ffffff;
   
+  --color-highlight: #48e120; /* Bright Neon Green */
+
   --color-background: #ffffff;
-  --color-foreground: #1f2937;
+  --color-foreground: #203452; /* Dark Blue/Grey for text */
   
   --color-muted: #f3f4f6;
   --color-muted-foreground: #6b7280;
@@ -64,4 +70,5 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-playfair), serif;
   font-weight: 700;
+  color: #203452; /* Enforce brand text color on headings */
 }

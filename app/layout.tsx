@@ -42,6 +42,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://regeneracioncelular.mascotasbadog.com',
   },
+  icons: {
+    icon: '/images/favicon.png',
+  },
 };
 
 export default function RootLayout({
