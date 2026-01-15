@@ -9,13 +9,13 @@ import {
   Search, 
   LogOut, 
   Calendar, 
-  User, 
-  Dog, 
-  Phone, 
   Activity,
   ChevronRight,
   RefreshCw,
-  LayoutDashboard
+  LayoutDashboard,
+  MessageCircle,
+  Clock,
+  Filter
 } from 'lucide-react';
 
 type Consultation = {
@@ -32,7 +32,6 @@ export default function AdminPage() {
   const [checkingAuth, setCheckingAuth] = useState(true);
 
   useEffect(() => {
-    // Check if previously authenticated
     const auth = localStorage.getItem('admin_auth');
     if (auth === 'true') {
       setIsAuthenticated(true);
@@ -53,7 +52,7 @@ export default function AdminPage() {
   if (checkingAuth) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-[#fafafa] font-sans text-gray-900 selection:bg-gray-200">
       <AnimatePresence mode="wait">
         {!isAuthenticated ? (
           <LoginPage key="login" onLoginSuccess={handleLoginSuccess} />
@@ -77,103 +76,77 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
     e.preventDefault();
     setLoading(true);
     setError('');
-
-    // Simulate network delay for effect
-    await new Promise(r => setTimeout(r, 800));
+    await new Promise(r => setTimeout(r, 600));
 
     if (email === 'admin@gmail.com' && password === 'admin123') {
       onLoginSuccess();
     } else {
-      setError('Invalid credentials. Access denied.');
+      setError('Invalid credentials.');
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#0a192f] p-4">
-      <div className="absolute inset-0 bg-[url('/images/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
-      
+    <div className="flex min-h-screen items-center justify-center bg-white p-4">
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="relative z-10 w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl"
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="w-full max-w-sm"
       >
-        <div className="bg-primary px-8 py-6 text-white">
-          <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-white/20 p-2">
-              <ShieldCheck className="h-6 w-6" />
-            </div>
-            <h1 className="font-display text-2xl font-bold tracking-wide">Admin Portal</h1>
+        <div className="mb-8 text-center">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-900 text-white">
+            <ShieldCheck className="h-6 w-6" />
           </div>
-          <p className="mt-2 text-primary-100 text-sm opacity-90">Secure access for authorized personnel only.</p>
+          <h1 className="text-xl font-semibold tracking-tight text-gray-900">Admin Access</h1>
+          <p className="mt-2 text-sm text-gray-500">Please enter your credentials to continue.</p>
         </div>
 
-        <div className="p-8">
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div className="space-y-2">
-              <label className="text-xs font-semibold uppercase tracking-wider text-gray-500">Email Address</label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full rounded-lg border border-gray-200 bg-gray-50 py-2.5 pl-10 pr-4 text-gray-900 outline-none transition focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
-                  placeholder="admin@gmail.com"
-                />
-              </div>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <div className="space-y-1.5">
+            <label className="text-xs font-medium text-gray-700">Email</label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="block w-full rounded-lg border border-gray-200 bg-gray-50 py-2 pl-9 pr-3 text-sm outline-none transition-all focus:border-gray-400 focus:bg-white focus:ring-0"
+                placeholder="admin@example.com"
+              />
             </div>
+          </div>
 
-            <div className="space-y-2">
-              <label className="text-xs font-semibold uppercase tracking-wider text-gray-500">Password</label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                <input
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full rounded-lg border border-gray-200 bg-gray-50 py-2.5 pl-10 pr-4 text-gray-900 outline-none transition focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
-                  placeholder="••••••••"
-                />
-              </div>
+          <div className="space-y-1.5">
+            <label className="text-xs font-medium text-gray-700">Password</label>
+            <div className="relative">
+              <Lock className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="block w-full rounded-lg border border-gray-200 bg-gray-50 py-2 pl-9 pr-3 text-sm outline-none transition-all focus:border-gray-400 focus:bg-white focus:ring-0"
+                placeholder="••••••••"
+              />
             </div>
+          </div>
 
-            {error && (
-              <motion.div 
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                className="rounded-lg bg-red-50 p-3 text-sm text-red-600 border border-red-100 flex items-center gap-2"
-              >
-                <div className="h-1.5 w-1.5 rounded-full bg-red-600" />
-                {error}
-              </motion.div>
-            )}
+          {error && (
+            <div className="rounded-md bg-red-50 p-3 text-xs font-medium text-red-600">
+              {error}
+            </div>
+          )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative w-full overflow-hidden rounded-xl bg-primary py-3 font-semibold text-white shadow-lg transition-all hover:bg-primary/90 hover:shadow-primary/30 disabled:opacity-70"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                {loading ? (
-                  <>Processing...</>
-                ) : (
-                  <>
-                    Sign In Dashboard
-                    <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </>
-                )}
-              </span>
-            </button>
-          </form>
-        </div>
-        
-        <div className="bg-gray-50 p-4 text-center text-xs text-gray-400 border-t border-gray-100">
-          Veterinary Regenerative Medicine Leon &copy; {new Date().getFullYear()}
-        </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-lg bg-gray-900 py-2.5 text-sm font-medium text-white transition-all hover:bg-gray-800 disabled:opacity-70"
+          >
+            {loading ? 'Authenticating...' : 'Sign In'}
+          </button>
+        </form>
       </motion.div>
     </div>
   );
@@ -202,11 +175,8 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
   };
 
   useEffect(() => {
-    fetchConsultations(true); // Initial load with spinner
-    const interval = setInterval(() => {
-        fetchConsultations(false); // Silent background update
-    }, 15000); // Poll every 15 seconds
-
+    fetchConsultations(true);
+    const interval = setInterval(() => fetchConsultations(false), 15000);
     return () => clearInterval(interval);
   }, []);
 
@@ -217,158 +187,170 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row">
-      {/* Sidebar */}
-      <aside className="w-full md:w-64 bg-[#0a192f] text-white flex-shrink-0 md:h-screen sticky top-0">
-        <div className="p-6 border-b border-gray-800">
-          <h2 className="font-display text-xl font-bold tracking-wide text-white">Vet Admin</h2>
-          <p className="text-xs text-gray-400 mt-1">Management Console</p>
+    <div className="flex h-screen bg-white">
+      {/* Minimal Sidebar */}
+      <aside className="w-64 border-r border-gray-100 bg-white hidden md:flex flex-col">
+        <div className="p-6">
+          <div className="flex items-center gap-2">
+            <div className="h-6 w-6 rounded bg-gray-900 text-white flex items-center justify-center font-serif text-xs font-bold">L</div>
+            <span className="font-semibold tracking-tight text-gray-900">Vet Admin</span>
+          </div>
         </div>
         
-        <nav className="p-4 space-y-2">
-          <a href="#" className="flex items-center gap-3 rounded-lg bg-primary/20 px-4 py-3 text-primary-400 font-medium">
-            <LayoutDashboard className="h-5 w-5" />
-            Overview
+        <nav className="flex-1 px-4 space-y-1">
+          <a href="#" className="flex items-center gap-3 rounded-md bg-gray-50 px-3 py-2 text-sm font-medium text-gray-900">
+            <LayoutDashboard className="h-4 w-4 text-gray-500" />
+            Dashboard
           </a>
-          <button onClick={onLogout} className="w-full flex items-center gap-3 rounded-lg px-4 py-3 text-gray-400 hover:bg-white/5 hover:text-white transition-colors">
-            <LogOut className="h-5 w-5" />
-            Sign Out
+          <div className="pt-4 pb-2">
+             <div className="px-3 text-[10px] font-semibold uppercase tracking-wider text-gray-400">Settings</div>
+          </div>
+          <button onClick={onLogout} className="w-full flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+            <LogOut className="h-4 w-4 text-gray-400" />
+            Logout
           </button>
         </nav>
+
+        <div className="p-4 border-t border-gray-50">
+           <div className="flex items-center gap-3">
+              <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                 <span className="text-xs font-medium text-gray-600">A</span>
+              </div>
+              <div className="flex flex-col">
+                 <span className="text-xs font-medium text-gray-900">Administrator</span>
+                 <span className="text-[10px] text-gray-400">admin@gmail.com</span>
+              </div>
+           </div>
+        </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-4 md:p-8 overflow-y-auto">
-        <header className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h1 className="font-display text-3xl font-bold text-gray-900">Dashboard</h1>
-            <p className="text-gray-500">Welcome back, Admin.</p>
-          </div>
+      <main className="flex-1 flex flex-col h-screen overflow-hidden bg-[#fafafa]">
+        {/* Top Header */}
+        <header className="h-16 flex-shrink-0 border-b border-gray-100 bg-white px-6 flex items-center justify-between">
+          <h1 className="text-lg font-semibold text-gray-900">Overview</h1>
           <div className="flex items-center gap-3">
-            <button 
-              onClick={() => fetchConsultations(true)}
-              className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition"
-            >
-              <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-              Refresh Data
-            </button>
+             <button 
+                onClick={() => fetchConsultations(true)}
+                className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                title="Refresh"
+             >
+                <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+             </button>
           </div>
         </header>
 
-        {/* Stats Grid */}
-        <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard 
-            title="Total Requests" 
-            value={consultations.length} 
-            icon={<Activity className="h-6 w-6 text-blue-600" />} 
-            bg="bg-blue-50"
-          />
-          <StatCard 
-            title="Today's Leads" 
-            value={consultations.filter(c => new Date(c.createdAt).toDateString() === new Date().toDateString()).length} 
-            icon={<Calendar className="h-6 w-6 text-green-600" />} 
-            bg="bg-green-50"
-          />
-        </div>
+        <div className="flex-1 overflow-y-auto p-6">
+          {/* Quick Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <StatCard 
+              label="Total Requests" 
+              value={consultations.length} 
+            />
+            <StatCard 
+              label="New Today" 
+              value={consultations.filter(c => new Date(c.createdAt).toDateString() === new Date().toDateString()).length}
+              highlight 
+            />
+          </div>
 
-        {/* Content Area */}
-        <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
-          <div className="border-b border-gray-200 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <h3 className="text-lg font-semibold text-gray-900">Recent Consultations</h3>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-              <input 
-                type="text"
-                placeholder="Search requests..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full sm:w-64 rounded-lg border border-gray-200 py-2 pl-9 pr-4 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary"
-              />
+          {/* Table Container */}
+          <div className="rounded-xl border border-gray-100 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+            {/* Table Toolbar */}
+            <div className="border-b border-gray-50 px-5 py-4 flex items-center justify-between">
+               <h2 className="text-sm font-medium text-gray-900">Consultations</h2>
+               <div className="relative">
+                  <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-gray-400" />
+                  <input 
+                    type="text"
+                    placeholder="Filter..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="h-9 w-48 sm:w-64 rounded-md border border-gray-200 bg-gray-50 pl-8 pr-3 text-xs outline-none focus:border-gray-300 focus:bg-white transition-all"
+                  />
+               </div>
             </div>
-          </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-gray-600">
-              <thead className="bg-gray-50 text-xs uppercase text-gray-500">
-                <tr>
-                  <th className="px-6 py-4 font-medium">Date</th>
-                  <th className="px-6 py-4 font-medium">Owner Name</th>
-                  <th className="px-6 py-4 font-medium">Contact</th>
-                  <th className="px-6 py-4 font-medium">Pet Details</th>
-                  <th className="px-6 py-4 font-medium">Symptom</th>
-                  <th className="px-6 py-4 font-medium text-right">Action</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {loading ? (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left">
+                <thead className="bg-gray-50/50 text-[10px] uppercase tracking-wider text-gray-400 font-semibold">
                   <tr>
-                    <td colSpan={6} className="px-6 py-12 text-center">
-                      <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-                    </td>
+                    <th className="px-5 py-3">Patient</th>
+                    <th className="px-5 py-3">Contact</th>
+                    <th className="px-5 py-3">Reason</th>
+                    <th className="px-5 py-3">Received</th>
+                    <th className="px-5 py-3 text-right">Actions</th>
                   </tr>
-                ) : filteredConsultations.length === 0 ? (
-                  <tr>
-                    <td colSpan={6} className="px-6 py-12 text-center text-gray-400">
-                      No consultation requests found matching your search.
-                    </td>
-                  </tr>
-                ) : (
-                  filteredConsultations.map((consultation) => (
-                    <motion.tr 
-                      key={consultation._id}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="group hover:bg-gray-50 transition-colors"
-                    >
-                      <td className="whitespace-nowrap px-6 py-4 text-gray-500">
-                        {new Date(consultation.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {loading && consultations.length === 0 ? (
+                    <tr>
+                      <td colSpan={5} className="px-5 py-12 text-center">
+                        <div className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-gray-900" />
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-3">
-                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold text-xs">
-                            {consultation.name.charAt(0)}
+                    </tr>
+                  ) : filteredConsultations.length === 0 ? (
+                    <tr>
+                      <td colSpan={5} className="px-5 py-12 text-center text-xs text-gray-400">
+                        No requests found.
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredConsultations.map((consultation) => (
+                      <motion.tr 
+                        key={consultation._id}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="group hover:bg-gray-50/50 transition-colors"
+                      >
+                        <td className="px-5 py-3">
+                          <div className="flex items-center gap-3">
+                            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-[10px] font-bold text-gray-600 border border-white shadow-sm">
+                              {consultation.name.charAt(0)}
+                            </div>
+                            <div>
+                              <div className="text-sm font-medium text-gray-900">{consultation.name}</div>
+                              <div className="text-xs text-gray-500">{consultation.petType}</div>
+                            </div>
                           </div>
-                          <span className="font-medium text-gray-900">{consultation.name}</span>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-2">
-                          <Phone className="h-3 w-3 text-gray-400" />
-                          {consultation.whatsapp}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-2">
-                          <Dog className="h-4 w-4 text-gray-400" />
-                          {consultation.petType}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800">
-                          {consultation.symptom}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <a 
-                          href={`https://wa.me/${consultation.whatsapp.replace(/\D/g, '')}`} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:text-primary/80"
-                        >
-                          Message
-                          <ChevronRight className="h-3 w-3" />
-                        </a>
-                      </td>
-                    </motion.tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-          
-          <div className="border-t border-gray-200 bg-gray-50 px-6 py-4 text-xs text-gray-500 flex justify-between">
-             <span>Showing {filteredConsultations.length} results</span>
-             <span>Admin Panel v1.0</span>
+                        </td>
+                        <td className="px-5 py-3">
+                          <div className="flex items-center gap-2 text-xs text-gray-500 font-mono">
+                            {consultation.whatsapp}
+                          </div>
+                        </td>
+                        <td className="px-5 py-3">
+                          <span className="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-[10px] font-medium text-gray-700">
+                            {consultation.symptom}
+                          </span>
+                        </td>
+                        <td className="px-5 py-3">
+                          <div className="flex items-center gap-1.5 text-xs text-gray-400">
+                            <Clock className="h-3 w-3" />
+                            {new Date(consultation.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                          </div>
+                        </td>
+                        <td className="px-5 py-3 text-right">
+                          <a 
+                            href={`https://wa.me/${consultation.whatsapp.replace(/\D/g, '')}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded-md border border-gray-200 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 hover:text-green-600 hover:border-green-200 transition-all"
+                          >
+                            <MessageCircle className="h-3 w-3" />
+                            Chat
+                          </a>
+                        </td>
+                      </motion.tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+            <div className="px-5 py-3 border-t border-gray-50 bg-gray-50/30 flex items-center justify-between text-[10px] text-gray-400">
+               <span>{filteredConsultations.length} records</span>
+               <span>Synced</span>
+            </div>
           </div>
         </div>
       </main>
@@ -376,15 +358,12 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
   );
 }
 
-function StatCard({ title, value, icon, bg }: { title: string, value: string | number, icon: React.ReactNode, bg: string }) {
+function StatCard({ label, value, highlight = false }: { label: string, value: number, highlight?: boolean }) {
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm flex items-center gap-4 transition-transform hover:-translate-y-1 hover:shadow-md">
-      <div className={`flex h-12 w-12 items-center justify-center rounded-lg ${bg}`}>
-        {icon}
-      </div>
-      <div>
-        <p className="text-sm font-medium text-gray-500">{title}</p>
-        <p className="text-2xl font-bold text-gray-900 font-display">{value}</p>
+    <div className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+      <div className="text-xs font-medium text-gray-500">{label}</div>
+      <div className={`mt-1 text-2xl font-bold tracking-tight ${highlight ? 'text-gray-900' : 'text-gray-700'}`}>
+        {value}
       </div>
     </div>
   );
