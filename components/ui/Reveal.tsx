@@ -54,6 +54,7 @@ export const Reveal = ({
   viewport = { once: true, margin: "-10%" }
 }: RevealProps) => {
   const ref = useRef(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isInView = useInView(ref, viewport as any);
   const mainControls = useAnimation();
 
@@ -69,9 +70,9 @@ export const Reveal = ({
   };
   
   if (blur) {
-    // @ts-ignore
+    // @ts-expect-error - Framer motion type definition might be missing filter for strict checks
     selectedVariant.hidden.filter = "blur(10px)";
-    // @ts-ignore
+    // @ts-expect-error - Framer motion type definition might be missing filter for strict checks
     selectedVariant.visible.filter = "blur(0px)";
   }
 

@@ -30,11 +30,15 @@ export default function AdminPage() {
   const [checkingAuth, setCheckingAuth] = useState(true);
 
   useEffect(() => {
-    const auth = localStorage.getItem('admin_auth');
-    if (auth === 'true') {
-      setIsAuthenticated(true);
-    }
-    setCheckingAuth(false);
+    // Check authentication on client mount
+    const timer = setTimeout(() => {
+      const auth = localStorage.getItem('admin_auth');
+      if (auth === 'true') {
+        setIsAuthenticated(true);
+      }
+      setCheckingAuth(false);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleLoginSuccess = () => {
