@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import { Header } from "@/components/layout/Header";
+import { HeaderWrapper } from "@/components/layout/HeaderWrapper";
 import "./globals.css";
 
 const inter = Inter({
@@ -51,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="antialiased">
-        <Header />
+        <HeaderWrapper />
         {children}
       </body>
     </html>
