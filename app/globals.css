@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 @theme {
+  --font-display: var(--font-playfair);
+  --font-sans: var(--font-inter);
+
   --color-primary: #059669;
   --color-primary-foreground: #ffffff;
   
@@ -12,26 +15,53 @@
   
   --color-muted: #f3f4f6;
   --color-muted-foreground: #6b7280;
+  
+  /* Custom Animations */
+  --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
+  --animate-fade-in: fade-in 1s ease-out forwards;
+  --animate-pulse-slow: pulse-slow 3s infinite;
+  
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  @keyframes shine {
+    100% {
+      transform: translateX(100%);
+    }
+  }
 }
 
-/* Base Styles - Applied globally */
-@layer base {
-  body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-playfair), ui-serif, Georgia, serif;
-    font-weight: 700;
-  }
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
 }
 
-/* Utility class to apply Playfair Display font */
-@layer utilities {
-  .font-display {
-    font-family: var(--font-playfair), ui-serif, Georgia, serif;
-  }
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), serif;
+  font-weight: 700;
 }

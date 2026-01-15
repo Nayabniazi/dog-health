@@ -1,73 +1,109 @@
-import Link from "next/link";
+'use client';
+
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/ui/Reveal";
+import { Stagger, StaggerItem } from "@/components/ui/Stagger";
 
 export function Hero() {
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
   return (
     <section className="relative w-full overflow-hidden bg-white pt-24 pb-12 lg:pt-32 lg:pb-24">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div className="space-y-8">
-            <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-sm font-medium text-primary">
-              <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse"></span>
-              Veterinary Regenerative Medicine in Leon
-            </div>
+            <Reveal type="fade-down" delay={0.1}>
+              <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-sm font-medium text-primary">
+                <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse"></span>
+                Veterinary Regenerative Medicine in Leon
+              </div>
+            </Reveal>
 
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl font-display">
-              It’s Not Just Medicine. <br />
-              <span className="text-primary">It’s Their Chance to Run Again.</span>
-            </h1>
-
-            <p className="max-w-[600px] text-lg text-gray-600 md:text-xl/relaxed">
-              Restore your pet's mobility through Advanced Cell Therapy without the risks of traditional surgery.
-            </p>
-
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <Link
-                href="#consultation"
-                className="inline-flex h-12 items-center justify-center rounded-md bg-accent px-8 text-sm font-bold text-white transition-all hover:bg-accent/90 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                SCHEDULE DIAGNOSTIC
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </div>
+            <Stagger stagger={0.15}>
+                <StaggerItem>
+                    <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl font-display">
+                    It’s Not Just Medicine. <br />
+                    <span className="text-primary">It’s Their Chance to Run Again.</span>
+                    </h1>
+                </StaggerItem>
+                <StaggerItem>
+                    <p className="max-w-[600px] text-lg text-gray-600 md:text-xl/relaxed mt-6">
+                    Restore your pet's mobility through Advanced Cell Therapy without the risks of traditional surgery.
+                    </p>
+                </StaggerItem>
+                <StaggerItem>
+                    <div className="flex flex-col gap-4 sm:flex-row mt-8">
+                    <a
+                        href="#consultation"
+                        onClick={(e) => handleScrollTo(e, '#consultation')}
+                        className="relative overflow-hidden inline-flex h-14 items-center justify-center rounded-full bg-gradient-to-b from-[#F2C94C] via-[#D4AF37] to-[#B29026] px-10 text-base font-bold text-white shadow-xl shadow-[#D4AF37]/40 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-[#D4AF37]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] border border-[#F2E4A8]/40 cursor-pointer"
+                    >
+                        <span className="relative z-10 flex items-center drop-shadow-md">
+                            SCHEDULE DIAGNOSTIC
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                        </span>
+                        {/* Shine Effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full hover:animate-[shine_1s_infinite]" />
+                    </a>
+                    </div>
+                </StaggerItem>
+            </Stagger>
           </div>
 
           <div className="relative mx-auto w-full max-w-[600px] lg:max-w-none">
             {/* LCP Optimization: Standard img tag for immediate render or Next/Image with priority */}
-            <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100 border border-gray-200">
-              <div className="flex h-full w-full items-center justify-center bg-gray-50 text-gray-400">
-                {/* Replace with <Image src="..." priority ... /> */}
-                <span className="text-lg font-medium text-center px-4">
-                  High-Res Vet Image <br />
-                  <span className="text-sm text-gray-400">(Preload Priority)</span>
-                </span>
-              </div>
-            </div>
+            <Reveal type="scale" duration={0.8} blur width="100%">
+                <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-100 border border-gray-200 shadow-2xl relative">
+                  <Image 
+                    src="/images/vet-microscope.jpg"
+                    alt="Veterinarian examining a dog with a microscope"
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+            </Reveal>
 
             {/* Floating Badge */}
-            <div className="absolute -bottom-6 -left-6 hidden rounded-xl bg-white p-4 border border-gray-200 md:block animate-fade-in-up">
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-green-600"
-                  >
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-500">Success Rate</p>
-                  <p className="text-xl font-bold text-gray-900">98.5%</p>
-                </div>
-              </div>
+            <div className="absolute -bottom-6 -left-6 hidden md:block">
+                <Reveal delay={0.8} type="fade-right">
+                    <div className="rounded-xl bg-white p-4 border border-gray-200 shadow-lg">
+                        <div className="flex items-center gap-4">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="text-green-600"
+                            >
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                            </div>
+                            <div>
+                            <p className="text-sm font-medium text-gray-500">Success Rate</p>
+                            <p className="text-xl font-bold text-gray-900">98.5%</p>
+                            </div>
+                        </div>
+                    </div>
+                </Reveal>
             </div>
           </div>
         </div>
