@@ -47,9 +47,9 @@ export function Hero() {
                     <a
                         href="#consultation"
                         onClick={(e) => handleScrollTo(e, '#consultation')}
-                        className="relative overflow-hidden inline-flex h-14 items-center justify-center rounded-full bg-gradient-to-b from-[#F2C94C] via-[#D4AF37] to-[#B29026] px-10 text-base font-bold text-white shadow-xl shadow-[#D4AF37]/40 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-[#D4AF37]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] border border-[#F2E4A8]/40 cursor-pointer"
+                        className="relative overflow-hidden inline-flex h-14 items-center justify-center rounded-full bg-gradient-to-b from-[#F2C94C] via-[#D4AF37] to-[#B29026] px-10 text-base font-bold text-[#203452] shadow-xl shadow-[#D4AF37]/40 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-[#D4AF37]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] border border-[#F2E4A8]/40 cursor-pointer"
                     >
-                        <span className="relative z-10 flex items-center drop-shadow-md">
+                        <span className="relative z-10 flex items-center drop-shadow-sm">
                             AGENDAR DIAGNÓSTICO
                             <ArrowRight className="ml-2 h-5 w-5" />
                         </span>

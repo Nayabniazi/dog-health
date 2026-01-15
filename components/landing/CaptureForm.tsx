@@ -121,7 +121,7 @@ export function CaptureForm() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="flex w-full items-center justify-center rounded-md bg-accent px-8 py-4 text-base font-bold text-white transition-all hover:bg-accent/90 disabled:opacity-70"
+                className="flex w-full items-center justify-center rounded-md bg-accent px-8 py-4 text-base font-bold text-accent-foreground transition-all hover:bg-accent/90 disabled:opacity-70"
               >
                 {isPending ? (
                   <>

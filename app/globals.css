@@ -5,14 +5,14 @@
   --font-sans: var(--font-inter);
 
   /* Brand Palette from Image */
-  --color-primary: #518b42; /* Forest Green */
+  --color-primary: #437536; /* Forest Green - Darkened for AA Contrast */
   --color-primary-foreground: #ffffff;
   
   --color-secondary: #02327b; /* Dark Royal Blue */
   --color-secondary-foreground: #ffffff;
 
   --color-accent: #D4AF37; /* Gold */
-  --color-accent-foreground: #ffffff;
+  --color-accent-foreground: #203452; /* Dark Blue for contrast on Gold */
   
   --color-highlight: #48e120; /* Bright Neon Green */
 
