@@ -50,10 +50,10 @@ export function ScienceMechanism() {
         </Stagger>
 
         <Reveal width="100%" delay={0.6} type="fade-up">
-          <div className="mt-16 rounded-3xl bg-gray-900 p-8 md:p-12 text-center text-white overflow-hidden relative group">
+          <div className="mt-16 rounded-3xl bg-secondary p-8 md:p-12 text-center text-white overflow-hidden relative group">
             <div className="relative z-10 transition-transform duration-500 group-hover:scale-[1.02]">
-              <h3 className="text-2xl font-bold font-display mb-4">Precisión de Laboratorio</h3>
-              <p className="text-gray-300 max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold font-display mb-4 !text-white">Precisión de Laboratorio</h3>
+              <p className="text-gray-200 max-w-2xl mx-auto">
                 Cada tratamiento se prepara específicamente para tu perro, bajo protocolos médicos avanzados que respetan su cuerpo, su edad y su historia. Aquí no tratamos diagnósticos, tratamos vidas que merecen seguir moviéndose sin dolor.
               </p>
             </div>
