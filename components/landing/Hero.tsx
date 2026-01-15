@@ -26,20 +26,20 @@ export function Hero() {
             <Reveal type="fade-down" delay={0.1}>
               <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-sm font-medium text-primary">
                 <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse"></span>
-                Veterinary Regenerative Medicine in Leon
+                Medicina Regenerativa Veterinaria en León
               </div>
             </Reveal>
 
             <Stagger stagger={0.15}>
                 <StaggerItem>
                     <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl font-display">
-                    It’s Not Just Medicine. <br />
-                    <span className="text-primary">It’s Their Chance to Run Again.</span>
+                    No es Solo Medicina. <br />
+                    <span className="text-primary">Es Su Oportunidad de Volver a Correr.</span>
                     </h1>
                 </StaggerItem>
                 <StaggerItem>
                     <p className="max-w-[600px] text-lg text-gray-600 md:text-xl/relaxed mt-6">
-                    Restore your pet's mobility through Advanced Cell Therapy without the risks of traditional surgery.
+                    Restaura la movilidad de tu mascota a través de Terapia Celular Avanzada sin los riesgos de la cirugía tradicional.
                     </p>
                 </StaggerItem>
                 <StaggerItem>
@@ -50,7 +50,7 @@ export function Hero() {
                         className="relative overflow-hidden inline-flex h-14 items-center justify-center rounded-full bg-gradient-to-b from-[#F2C94C] via-[#D4AF37] to-[#B29026] px-10 text-base font-bold text-white shadow-xl shadow-[#D4AF37]/40 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-[#D4AF37]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] border border-[#F2E4A8]/40 cursor-pointer"
                     >
                         <span className="relative z-10 flex items-center drop-shadow-md">
-                            SCHEDULE DIAGNOSTIC
+                            AGENDAR DIAGNÓSTICO
                             <ArrowRight className="ml-2 h-5 w-5" />
                         </span>
                         {/* Shine Effect */}
@@ -67,7 +67,7 @@ export function Hero() {
                 <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-100 border border-gray-200 shadow-2xl relative">
                   <Image 
                     src="/images/vet-microscope.jpg"
-                    alt="Veterinarian examining a dog with a microscope"
+                    alt="Veterinario examinando un perro con microscopio"
                     fill
                     className="object-cover"
                     priority
@@ -98,7 +98,7 @@ export function Hero() {
                             </svg>
                             </div>
                             <div>
-                            <p className="text-sm font-medium text-gray-500">Success Rate</p>
+                            <p className="text-sm font-medium text-gray-500">Tasa de Éxito</p>
                             <p className="text-xl font-bold text-gray-900">98.5%</p>
                             </div>
                         </div>

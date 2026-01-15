@@ -6,18 +6,18 @@ export function ScienceMechanism() {
   const mechanisms = [
     {
       icon: TestTube,
-      title: "Stem Cells",
-      description: "Repairing cartilage and bone tissue at the source using autologous therapy.",
+      title: "Células Madre",
+      description: "Reparando cartílago y tejido óseo desde la fuente usando terapia autóloga.",
     },
     {
       icon: Droplet,
-      title: "Platelet-Rich Plasma (PRP)",
-      description: "Natural bio-stimulation to eliminate chronic pain and accelerate healing.",
+      title: "Plasma Rico en Plaquetas (PRP)",
+      description: "Bio-estimulación natural para eliminar dolor crónico y acelerar la curación.",
     },
     {
       icon: Bone,
-      title: "Hyaluronic Acid",
-      description: "Medical-grade mechanical lubrication to restore joint fluidity.",
+      title: "Ácido Hialurónico",
+      description: "Lubricación mecánica de grado médico para restaurar la fluidez articular.",
     },
   ];
 
@@ -26,9 +26,9 @@ export function ScienceMechanism() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <Reveal width="100%">
-            <span className="text-primary font-semibold tracking-wider uppercase text-sm">The Unique Mechanism</span>
+            <span className="text-primary font-semibold tracking-wider uppercase text-sm">El Mecanismo Único</span>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-display">
-              The Power of Healing Resides <br /> Within Their Own Cells.
+              El Poder de Curación Reside <br /> Dentro de Sus Propias Células.
             </h2>
           </Reveal>
         </div>
@@ -52,9 +52,9 @@ export function ScienceMechanism() {
         <Reveal width="100%" delay={0.6} type="fade-up">
           <div className="mt-16 rounded-3xl bg-gray-900 p-8 md:p-12 text-center text-white overflow-hidden relative group">
             <div className="relative z-10 transition-transform duration-500 group-hover:scale-[1.02]">
-              <h3 className="text-2xl font-bold font-display mb-4">Laboratory Precision</h3>
+              <h3 className="text-2xl font-bold font-display mb-4">Precisión de Laboratorio</h3>
               <p className="text-gray-300 max-w-2xl mx-auto">
-                We utilize advanced centrifugation and incubation protocols in our ISO-certified lab environment.
+                Cada tratamiento se prepara específicamente para tu perro, bajo protocolos médicos avanzados que respetan su cuerpo, su edad y su historia. Aquí no tratamos diagnósticos, tratamos vidas que merecen seguir moviéndose sin dolor.
               </p>
             </div>
             {/* Decorative background element */}

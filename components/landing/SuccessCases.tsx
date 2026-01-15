@@ -51,8 +51,8 @@ export function SuccessCases() {
 
                   {/* Caption - Hidden when playing */}
                   <div className={`absolute bottom-4 left-4 right-4 p-4 bg-black/60 backdrop-blur-md rounded-xl transition-opacity duration-300 ${isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-                      <p className="text-white font-medium">The Case of "Bruno"</p>
-                      <p className="text-gray-300 text-sm">Day 1 Limping vs. Week 4 Running</p>
+                      <p className="text-white font-medium">El Caso de "Bruno"</p>
+                      <p className="text-gray-300 text-sm">Día 1 Cojera vs. Semana 4 Corriendo</p>
                   </div>
                </div>
              </Reveal>
@@ -61,21 +61,21 @@ export function SuccessCases() {
           <div className="order-1 lg:order-2 space-y-6">
             <Reveal type="fade-right">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-display">
-                Real Results. <br />
-                Irrefutable Social Proof.
+                Resultados Reales. <br />
+                Prueba Social Irrefutable.
               </h2>
             </Reveal>
             
             <Reveal delay={0.2} type="fade-right">
               <p className="text-lg text-gray-600">
-                "We were told surgery was the only option. Three weeks after the treatment, Bruno was chasing his ball again like a puppy."
+                "Nos dijeron que la cirugía era la única opción. Tres semanas después del tratamiento, Bruno perseguía su pelota de nuevo como un cachorro."
               </p>
             </Reveal>
             
             <Reveal delay={0.4} type="fade-right">
               <div className="pt-6 border-t border-green-200">
                   <p className="text-4xl font-bold text-primary font-display">500+</p>
-                  <p className="text-gray-600 font-medium">Patients in Leon have avoided the operating room.</p>
+                  <p className="text-gray-600 font-medium">Pacientes en León han evitado el quirófano.</p>
               </div>
             </Reveal>
           </div>

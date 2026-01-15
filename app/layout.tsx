@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { HeaderWrapper } from "@/components/layout/HeaderWrapper";
+import { GoogleAnalytics } from '@next/third-parties/google';
 import "./globals.css";
 
 const inter = Inter({
@@ -16,9 +17,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Veterinary Regenerative Medicine Leon | Advanced Stem Cell Therapy",
-  description: "Restore your pet's mobility through Advanced Stem Cell Therapy & PRP without the risks of traditional surgery. Board-certified specialists in Leon.",
-  keywords: ["Veterinary Stem Cells Leon", "Dog Arthritis Treatment", "Cat Regenerative Medicine", "Pet Mobility Leon", "Non-Surgical Vet"],
+  title: "Medicina Regenerativa Veterinaria BaDog | Terapia Celular Avanzada",
+  description: "Restaura la movilidad de tu mascota a través de Terapia de Células Madre y PRP sin los riesgos de la cirugía tradicional. Especialistas certificados en León.",
+  keywords: ["Células Madre Veterinarias León", "Tratamiento Artritis Perro", "Medicina Regenerativa Gatos", "Movilidad Mascotas León", "Veterinario No Quirúrgico"],
   robots: {
     index: true,
     follow: true,
@@ -31,15 +32,15 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Veterinary Regenerative Medicine Leon | Save Your Pet's Mobility",
-    description: "It’s Not Just Medicine. It’s Their Chance to Run Again. Advanced Stem Cell & PRP Therapy.",
-    url: 'https://veterinaryregenerationleon.com',
-    siteName: 'Veterinary Regenerative Medicine Leon',
-    locale: 'en_US',
+    title: "Medicina Regenerativa Veterinaria BaDog | Salva la Movilidad de tu Mascota",
+    description: "No es Solo Medicina. Es Su Oportunidad de Volver a Correr. Terapia Avanzada de Células Madre y PRP.",
+    url: 'https://regeneracioncelular.mascotasbadog.com',
+    siteName: 'Medicina Regenerativa Veterinaria BaDog',
+    locale: 'es_MX',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://veterinaryregenerationleon.com',
+    canonical: 'https://regeneracioncelular.mascotasbadog.com',
   },
 };
 
@@ -49,10 +50,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="es" className={`${inter.variable} ${playfair.variable}`}>
       <body className="antialiased">
         <HeaderWrapper />
         {children}
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS || ""} />
       </body>
     </html>
   );

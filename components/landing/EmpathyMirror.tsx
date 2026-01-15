@@ -6,15 +6,15 @@ export function EmpathyMirror() {
   const symptoms = [
     {
       icon: AlertCircle,
-      text: "Do they struggle to get up in the morning?",
+      text: "¿Luchan por levantarse en la mañana?",
     },
     {
       icon: Activity,
-      text: "Are they hesitant to climb stairs or jump onto the sofa?",
+      text: "¿Dudan al subir escaleras o saltar al sofá?",
     },
     {
       icon: Frown,
-      text: "Have they lost their enthusiasm for daily walks?",
+      text: "¿Han perdido su entusiasmo por los paseos diarios?",
     },
   ];
 
@@ -24,8 +24,8 @@ export function EmpathyMirror() {
         <div className="mx-auto max-w-3xl text-center">
           <Reveal width="100%" type="fade-down">
             <h2 className="mb-12 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-display">
-              Watching Them Suffer is the <br />
-              Hardest Part for Any Owner.
+              Verlos Sufrir es la <br />
+              Parte Más Difícil para Cualquier Dueño.
             </h2>
           </Reveal>
 
@@ -46,7 +46,7 @@ export function EmpathyMirror() {
 
           <Reveal width="100%" delay={0.5} type="fade">
             <p className="mt-10 text-center text-gray-500">
-              This isn't just "old age". It's a medical condition requiring a specialist.
+              Esto no es solo "vejez". Es una condición médica que requiere un especialista.
             </p>
           </Reveal>
         </div>

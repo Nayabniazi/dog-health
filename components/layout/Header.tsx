@@ -18,10 +18,10 @@ export function Header() {
   }, []);
 
   const navLinks = [
-    { name: 'Symptoms', href: '#symptoms' },
-    { name: 'The Science', href: '#science' },
-    { name: 'Success Stories', href: '#success-stories' },
-    { name: 'About Us', href: '#about' },
+    { name: 'Síntomas', href: '#symptoms' },
+    { name: 'La Ciencia', href: '#science' },
+    { name: 'Casos de Éxito', href: '#success-stories' },
+    { name: 'Nosotros', href: '#about' },
   ];
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -53,14 +53,14 @@ export function Header() {
              window.scrollTo({ top: 0, behavior: 'smooth' });
           }}>
             <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white font-serif font-bold text-xl transition-transform group-hover:scale-110">
-              L
+              B
             </div>
             <div className={`flex flex-col transition-opacity ${isScrolled ? 'opacity-100' : 'opacity-90'}`}>
               <span className="text-sm font-bold tracking-tight text-gray-900 leading-none">
-                VET REGENERATION
+                BADOG
               </span>
               <span className="text-[10px] text-gray-500 font-medium tracking-widest uppercase">
-                Leon, Mexico
+                León, México
               </span>
             </div>
           </Link>
@@ -83,7 +83,7 @@ export function Header() {
               onClick={(e) => handleScrollTo(e, '#consultation')}
               className="px-5 py-2.5 rounded-full bg-gray-900 text-white text-sm font-medium transition-all hover:bg-primary hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer"
             >
-              Book Consultation
+              Agendar Consulta
             </a>
           </div>
 
@@ -123,7 +123,7 @@ export function Header() {
                 onClick={(e) => handleScrollTo(e, '#consultation')}
                 className="mt-2 w-full text-center px-5 py-3 rounded-lg bg-primary text-white font-medium cursor-pointer"
               >
-                Book Consultation
+                Agendar Consulta
               </a>
             </div>
           </motion.div>

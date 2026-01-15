@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { submitLead, type FormState } from "@/app/actions";
-import { Loader2 } from "lucide-react";
+import { Loader2, CreditCard } from "lucide-react";
 
 const initialState: FormState = {
   success: false,
@@ -18,10 +18,10 @@ export function CaptureForm() {
         <div className="mx-auto max-w-2xl rounded-2xl bg-white p-8 border border-gray-200 md:p-12">
           <div className="mb-8 text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 font-display">
-              Start the Recovery Journey Today
+              Inicia el Viaje de Recuperación Hoy
             </h2>
             <p className="mt-2 text-gray-600">
-              Privacy guaranteed. We only contact you for medical purposes.
+              Privacidad garantizada. Solo te contactamos con fines médicos.
             </p>
           </div>
 
@@ -42,14 +42,14 @@ export function CaptureForm() {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-medium text-gray-900">Request Received</h3>
+              <h3 className="text-lg font-medium text-gray-900">Solicitud Recibida</h3>
               <p className="mt-2 text-gray-600">{state.message}</p>
             </div>
           ) : (
             <form action={action} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                  Owner's Name
+                  Nombre del Propietario
                 </label>
                 <input
                   type="text"
@@ -57,13 +57,13 @@ export function CaptureForm() {
                   id="name"
                   required
                   className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 focus:border-primary focus:ring-primary sm:text-sm"
-                  placeholder="John Doe"
+                  placeholder="Juan Pérez"
                 />
               </div>
 
               <div>
                 <label htmlFor="whatsapp" className="block text-sm font-medium text-gray-700">
-                  WhatsApp Number
+                  Número de WhatsApp
                 </label>
                 <input
                   type="tel"
@@ -78,7 +78,7 @@ export function CaptureForm() {
               <div className="grid gap-6 md:grid-cols-2">
                 <div>
                   <label htmlFor="petType" className="block text-sm font-medium text-gray-700">
-                    Pet Type & Age
+                    Tipo de Mascota y Edad
                   </label>
                   <input
                     type="text"
@@ -86,24 +86,35 @@ export function CaptureForm() {
                     id="petType"
                     required
                     className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 focus:border-primary focus:ring-primary sm:text-sm"
-                    placeholder="Dog, 8 years"
+                    placeholder="Perro, 8 años"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="symptom" className="block text-sm font-medium text-gray-700">
-                    Primary Symptom
+                    Síntoma Principal
                   </label>
                   <select
                     name="symptom"
                     id="symptom"
                     className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 focus:border-primary focus:ring-primary sm:text-sm"
                   >
-                    <option value="limping">Limping / Difficulty Walking</option>
-                    <option value="pain">Chronic Pain</option>
-                    <option value="post-surgery">Post-Surgery Recovery</option>
-                    <option value="other">Other</option>
+                    <option value="limping">Cojera / Dificultad para caminar</option>
+                    <option value="pain">Dolor Crónico</option>
+                    <option value="post-surgery">Recuperación Post-cirugía</option>
+                    <option value="other">Otro</option>
                   </select>
+                </div>
+              </div>
+
+              {/* Payment Section */}
+              <div className="rounded-lg bg-blue-50 p-4 border border-blue-100 flex items-center gap-4">
+                <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+                  <CreditCard className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-blue-900">Costo de la Consulta: $600 MXN (~30 USD)</p>
+                  <p className="text-xs text-blue-700">El pago se procesará al confirmar su cita.</p>
                 </div>
               </div>
 
@@ -115,10 +126,10 @@ export function CaptureForm() {
                 {isPending ? (
                   <>
                     <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    Processing...
+                    Procesando...
                   </>
                 ) : (
-                  "SCHEDULE CONSULTATION"
+                  "AGENDAR CONSULTA"
                 )}
               </button>
             </form>

@@ -35,8 +35,8 @@ export default function LandingPage() {
       {/* Simple Footer */}
       <footer className="bg-gray-900 border-t border-gray-800 py-12 text-center text-gray-500 text-sm">
         <div className="container mx-auto px-4">
-          <p>© {new Date().getFullYear()} Veterinary Regenerative Medicine Leon. All rights reserved.</p>
-          <p className="mt-2">Medical Director: Dr. [Name Placeholder] | License #12345</p>
+          <p>© {new Date().getFullYear()} Medicina Regenerativa Veterinaria BaDog. Todos los derechos reservados.</p>
+          <p className="mt-2">Director Médico: Dr. [Nombre] | Cédula #12345</p>
         </div>
       </footer>
     </main>
