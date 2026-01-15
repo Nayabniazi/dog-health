@@ -96,10 +96,10 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
         className="w-full max-w-sm"
       >
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-secondary">
-            <ShieldCheck className="h-6 w-6" />
+          <div className="mx-auto mb-6 flex h-24 w-auto items-center justify-center">
+            <img src="/images/header-logo.png" alt="Logo" className="h-full w-auto object-contain drop-shadow-sm" />
           </div>
-          <h1 className="text-xl font-semibold tracking-tight text-white">Acceso Administrativo</h1>
+          <h1 className="text-xl font-semibold tracking-tight !text-white">Acceso Administrativo</h1>
           <p className="mt-2 text-sm text-white/70">Por favor ingresa tus credenciales para continuar.</p>
         </div>
 
@@ -204,8 +204,10 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
         <div className="p-6 flex items-center justify-between border-b border-white/10">
-          <div className="flex items-center gap-2">
-            <div className="h-6 w-6 rounded bg-white text-secondary flex items-center justify-center font-serif text-xs font-bold">B</div>
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-md bg-white p-1 flex items-center justify-center shadow-sm">
+              <img src="/images/header-logo.png" alt="Logo" className="h-full w-full object-contain" />
+            </div>
             <span className="font-semibold tracking-tight text-white">Admin Veterinaria</span>
           </div>
           <button 
