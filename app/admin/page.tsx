@@ -186,8 +186,8 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const fetchConsultations = async () => {
-    setLoading(true);
+  const fetchConsultations = async (showLoading = false) => {
+    if (showLoading) setLoading(true);
     try {
       const response = await fetch('/api/consultations');
       if (response.ok) {
@@ -197,12 +197,17 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
     } catch (err) {
       console.error('Error fetching data:', err);
     } finally {
-      setLoading(false);
+      if (showLoading) setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchConsultations();
+    fetchConsultations(true); // Initial load with spinner
+    const interval = setInterval(() => {
+        fetchConsultations(false); // Silent background update
+    }, 15000); // Poll every 15 seconds
+
+    return () => clearInterval(interval);
   }, []);
 
   const filteredConsultations = consultations.filter(c => 
@@ -241,7 +246,7 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
           </div>
           <div className="flex items-center gap-3">
             <button 
-              onClick={fetchConsultations}
+              onClick={() => fetchConsultations(true)}
               className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition"
             >
               <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
