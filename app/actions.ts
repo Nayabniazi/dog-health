@@ -1,22 +1,49 @@
 'use server'
 
+import dbConnect from "@/lib/mongodb";
+import Consultation from "@/models/Consultation";
+
 export type FormState = {
   success: boolean;
   message: string;
 }
 
 export async function submitLead(prevState: FormState, formData: FormData): Promise<FormState> {
-  // Simulate network delay
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  try {
+    await dbConnect();
 
-  const name = formData.get('name');
-  const petName = formData.get('petName');
+    const name = formData.get('name') as string;
+    const whatsapp = formData.get('whatsapp') as string;
+    const petType = formData.get('petType') as string;
+    const symptom = formData.get('symptom') as string;
 
-  // In a real application, you would save this to a database or send an email/WhatsApp
-  console.log(`Lead Received: Owner ${name}, Pet ${petName}`);
+    if (!name || !whatsapp || !petType || !symptom) {
+       return {
+        success: false,
+        message: "Please fill in all fields."
+      };
+    }
 
-  return {
-    success: true,
-    message: "Request received. A specialist will contact you shortly."
-  };
+    const newConsultation = new Consultation({
+      name,
+      whatsapp,
+      petType,
+      symptom,
+    });
+
+    await newConsultation.save();
+
+    console.log(`Lead Saved: Owner ${name}, Pet Type ${petType}`);
+
+    return {
+      success: true,
+      message: "Request received. A specialist will contact you shortly."
+    };
+  } catch (error) {
+    console.error("Error submitting lead:", error);
+    return {
+      success: false,
+      message: "Something went wrong. Please try again."
+    };
+  }
 }
