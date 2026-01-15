@@ -79,7 +79,7 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
     if (email === 'admin@gmail.com' && password === 'admin123') {
       onLoginSuccess();
     } else {
-      setError('Invalid credentials.');
+      setError('Credenciales inválidas.');
       setLoading(false);
     }
   };
@@ -96,13 +96,13 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-900 text-white">
             <ShieldCheck className="h-6 w-6" />
           </div>
-          <h1 className="text-xl font-semibold tracking-tight text-gray-900">Admin Access</h1>
-          <p className="mt-2 text-sm text-gray-500">Please enter your credentials to continue.</p>
+          <h1 className="text-xl font-semibold tracking-tight text-gray-900">Acceso Administrativo</h1>
+          <p className="mt-2 text-sm text-gray-500">Por favor ingresa tus credenciales para continuar.</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-gray-700">Email</label>
+            <label className="text-xs font-medium text-gray-700">Correo Electrónico</label>
             <div className="relative">
               <Mail className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
               <input
@@ -117,7 +117,7 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-gray-700">Password</label>
+            <label className="text-xs font-medium text-gray-700">Contraseña</label>
             <div className="relative">
               <Lock className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
               <input
@@ -142,7 +142,7 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
             disabled={loading}
             className="w-full rounded-lg bg-gray-900 py-2.5 text-sm font-medium text-white transition-all hover:bg-gray-800 disabled:opacity-70"
           >
-            {loading ? 'Authenticating...' : 'Sign In'}
+            {loading ? 'Autenticando...' : 'Iniciar Sesión'}
           </button>
         </form>
       </motion.div>
@@ -203,7 +203,7 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
         <div className="p-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="h-6 w-6 rounded bg-gray-900 text-white flex items-center justify-center font-serif text-xs font-bold">L</div>
-            <span className="font-semibold tracking-tight text-gray-900">Vet Admin</span>
+            <span className="font-semibold tracking-tight text-gray-900">Admin Veterinaria</span>
           </div>
           <button 
             onClick={() => setIsMobileMenuOpen(false)}
@@ -216,14 +216,14 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
         <nav className="flex-1 px-4 space-y-1">
           <a href="#" className="flex items-center gap-3 rounded-md bg-gray-50 px-3 py-2 text-sm font-medium text-gray-900">
             <LayoutDashboard className="h-4 w-4 text-gray-500" />
-            Dashboard
+            Panel de Control
           </a>
           <div className="pt-4 pb-2">
-             <div className="px-3 text-[10px] font-semibold uppercase tracking-wider text-gray-400">Settings</div>
+             <div className="px-3 text-[10px] font-semibold uppercase tracking-wider text-gray-400">Configuración</div>
           </div>
           <button onClick={onLogout} className="w-full flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
             <LogOut className="h-4 w-4 text-gray-400" />
-            Logout
+            Cerrar Sesión
           </button>
         </nav>
 
@@ -233,7 +233,7 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
                  <span className="text-xs font-medium text-gray-600">A</span>
               </div>
               <div className="flex flex-col overflow-hidden">
-                 <span className="text-xs font-medium text-gray-900 truncate">Administrator</span>
+                 <span className="text-xs font-medium text-gray-900 truncate">Administrador</span>
                  <span className="text-[10px] text-gray-400 truncate">admin@gmail.com</span>
               </div>
            </div>
@@ -251,13 +251,13 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
             >
               <Menu className="h-5 w-5" />
             </button>
-            <h1 className="text-lg font-semibold text-gray-900">Overview</h1>
+            <h1 className="text-lg font-semibold text-gray-900">Resumen</h1>
           </div>
           <div className="flex items-center gap-3">
              <button 
                 onClick={() => fetchConsultations(true)}
                 className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-                title="Refresh"
+                title="Actualizar"
              >
                 <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
              </button>
@@ -268,11 +268,11 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
           {/* Quick Stats */}
           <div className="grid grid-cols-2 gap-3 md:gap-4 mb-6">
             <StatCard 
-              label="Total Requests" 
+              label="Solicitudes Totales" 
               value={consultations.length} 
             />
             <StatCard 
-              label="New Today" 
+              label="Nuevas Hoy" 
               value={consultations.filter(c => new Date(c.createdAt).toDateString() === new Date().toDateString()).length}
               highlight 
             />
@@ -282,12 +282,12 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
           <div className="rounded-xl border border-gray-100 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
             {/* Table Toolbar */}
             <div className="border-b border-gray-50 px-4 md:px-5 py-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-               <h2 className="text-sm font-medium text-gray-900">Consultations</h2>
+               <h2 className="text-sm font-medium text-gray-900">Consultas</h2>
                <div className="relative w-full md:w-auto">
                   <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-gray-400" />
                   <input 
                     type="text"
-                    placeholder="Filter..."
+                    placeholder="Filtrar..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="h-9 w-full md:w-64 rounded-md border border-gray-200 bg-gray-50 pl-8 pr-3 text-xs outline-none focus:border-gray-300 focus:bg-white transition-all"
@@ -299,11 +299,11 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
               <table className="w-full text-left min-w-[600px] md:min-w-0">
                 <thead className="bg-gray-50/50 text-[10px] uppercase tracking-wider text-gray-400 font-semibold">
                   <tr>
-                    <th className="px-5 py-3">Patient</th>
-                    <th className="px-5 py-3">Contact</th>
-                    <th className="px-5 py-3">Reason</th>
-                    <th className="px-5 py-3">Received</th>
-                    <th className="px-5 py-3 text-right">Actions</th>
+                    <th className="px-5 py-3">Paciente</th>
+                    <th className="px-5 py-3">Contacto</th>
+                    <th className="px-5 py-3">Motivo</th>
+                    <th className="px-5 py-3">Recibido</th>
+                    <th className="px-5 py-3 text-right">Acciones</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-50">
@@ -316,7 +316,7 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
                   ) : filteredConsultations.length === 0 ? (
                     <tr>
                       <td colSpan={5} className="px-5 py-12 text-center text-xs text-gray-400">
-                        No requests found.
+                        No se encontraron solicitudes.
                       </td>
                     </tr>
                   ) : (
@@ -372,8 +372,8 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
               </table>
             </div>
             <div className="px-5 py-3 border-t border-gray-50 bg-gray-50/30 flex items-center justify-between text-[10px] text-gray-400">
-               <span>{filteredConsultations.length} records</span>
-               <span>Synced</span>
+               <span>{filteredConsultations.length} registros</span>
+               <span>Sincronizado</span>
             </div>
           </div>
         </div>
