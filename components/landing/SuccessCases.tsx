@@ -60,7 +60,7 @@ export function SuccessCases() {
             
             <Reveal delay={0.2} type="fade-right">
               <p className="text-lg text-gray-600">
-                "Nos dijeron que la cirugía era la única opción. Tres semanas después del tratamiento, Bruno perseguía su pelota de nuevo como un cachorro."
+                &quot;Nos dijeron que la cirugía era la única opción. Tres semanas después del tratamiento, Bruno perseguía su pelota de nuevo como un cachorro.&quot;
               </p>
             </Reveal>
             

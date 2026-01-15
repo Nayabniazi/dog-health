@@ -46,7 +46,7 @@ export function EmpathyMirror() {
 
           <Reveal width="100%" delay={0.5} type="fade">
             <p className="mt-10 text-center text-gray-500">
-              Esto no es solo "vejez". Es una condición médica que requiere un especialista.
+              Esto no es solo &quot;vejez&quot;. Es una condición médica que requiere un especialista.
             </p>
           </Reveal>
         </div>

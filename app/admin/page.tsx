@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ShieldCheck, 
   Lock, 
   Mail, 
   Search, 
@@ -96,8 +96,14 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
         className="w-full max-w-sm"
       >
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-6 flex h-24 w-auto items-center justify-center">
-            <img src="/images/header-logo.png" alt="Logo" className="h-full w-auto object-contain drop-shadow-sm" />
+          <div className="mx-auto mb-6 flex h-24 w-auto items-center justify-center relative">
+            <Image 
+              src="/images/header-logo.png" 
+              alt="Logo" 
+              width={200} 
+              height={100}
+              className="h-full w-auto object-contain drop-shadow-sm" 
+            />
           </div>
           <h1 className="text-xl font-semibold tracking-tight !text-white">Acceso Administrativo</h1>
           <p className="mt-2 text-sm text-white/70">Por favor ingresa tus credenciales para continuar.</p>
@@ -205,8 +211,14 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
       `}>
         <div className="p-6 flex items-center justify-between border-b border-white/10">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-md bg-white p-1 flex items-center justify-center shadow-sm">
-              <img src="/images/header-logo.png" alt="Logo" className="h-full w-full object-contain" />
+            <div className="h-10 w-10 rounded-md bg-white p-1 flex items-center justify-center shadow-sm relative">
+              <Image 
+                src="/images/header-logo.png" 
+                alt="Logo" 
+                fill
+                sizes="40px"
+                className="object-contain" 
+              />
             </div>
             <span className="font-semibold tracking-tight text-white">Admin Veterinaria</span>
           </div>
