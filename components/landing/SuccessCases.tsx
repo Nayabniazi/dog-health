@@ -21,7 +21,7 @@ export function SuccessCases() {
                  {!isPlaying ? (
                    <>
                      <Image
-                       src="/images/vet-microscope.jpg" // Using an existing image as placeholder
+                       src="/images/hero-image.jpg"
                        alt="Video de Caso de Éxito"
                        fill
                        className="object-cover opacity-60 transition-opacity group-hover:opacity-40"
