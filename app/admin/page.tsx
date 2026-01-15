@@ -8,14 +8,12 @@ import {
   Mail, 
   Search, 
   LogOut, 
-  Calendar, 
-  Activity,
-  ChevronRight,
   RefreshCw,
   LayoutDashboard,
   MessageCircle,
   Clock,
-  Filter
+  Menu,
+  X
 } from 'lucide-react';
 
 type Consultation = {
@@ -158,6 +156,7 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
   const [consultations, setConsultations] = useState<Consultation[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const fetchConsultations = async (showLoading = false) => {
     if (showLoading) setLoading(true);
@@ -188,13 +187,30 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
 
   return (
     <div className="flex h-screen bg-white">
-      {/* Minimal Sidebar */}
-      <aside className="w-64 border-r border-gray-100 bg-white hidden md:flex flex-col">
-        <div className="p-6">
+      {/* Mobile Sidebar Backdrop */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 z-20 bg-black/50 md:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside className={`
+        fixed inset-y-0 left-0 z-30 w-64 transform border-r border-gray-100 bg-white transition-transform duration-200 ease-in-out md:static md:translate-x-0
+        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        <div className="p-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="h-6 w-6 rounded bg-gray-900 text-white flex items-center justify-center font-serif text-xs font-bold">L</div>
             <span className="font-semibold tracking-tight text-gray-900">Vet Admin</span>
           </div>
+          <button 
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="md:hidden text-gray-500 hover:text-gray-900"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
         
         <nav className="flex-1 px-4 space-y-1">
@@ -216,9 +232,9 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
               <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
                  <span className="text-xs font-medium text-gray-600">A</span>
               </div>
-              <div className="flex flex-col">
-                 <span className="text-xs font-medium text-gray-900">Administrator</span>
-                 <span className="text-[10px] text-gray-400">admin@gmail.com</span>
+              <div className="flex flex-col overflow-hidden">
+                 <span className="text-xs font-medium text-gray-900 truncate">Administrator</span>
+                 <span className="text-[10px] text-gray-400 truncate">admin@gmail.com</span>
               </div>
            </div>
         </div>
@@ -227,8 +243,16 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
       {/* Main Content */}
       <main className="flex-1 flex flex-col h-screen overflow-hidden bg-[#fafafa]">
         {/* Top Header */}
-        <header className="h-16 flex-shrink-0 border-b border-gray-100 bg-white px-6 flex items-center justify-between">
-          <h1 className="text-lg font-semibold text-gray-900">Overview</h1>
+        <header className="h-16 flex-shrink-0 border-b border-gray-100 bg-white px-4 md:px-6 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="md:hidden p-1 -ml-1 text-gray-500 hover:text-gray-900"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+            <h1 className="text-lg font-semibold text-gray-900">Overview</h1>
+          </div>
           <div className="flex items-center gap-3">
              <button 
                 onClick={() => fetchConsultations(true)}
@@ -240,9 +264,9 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
           </div>
         </header>
 
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-4 md:p-6">
           {/* Quick Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-2 gap-3 md:gap-4 mb-6">
             <StatCard 
               label="Total Requests" 
               value={consultations.length} 
@@ -257,22 +281,22 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
           {/* Table Container */}
           <div className="rounded-xl border border-gray-100 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
             {/* Table Toolbar */}
-            <div className="border-b border-gray-50 px-5 py-4 flex items-center justify-between">
+            <div className="border-b border-gray-50 px-4 md:px-5 py-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                <h2 className="text-sm font-medium text-gray-900">Consultations</h2>
-               <div className="relative">
+               <div className="relative w-full md:w-auto">
                   <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-gray-400" />
                   <input 
                     type="text"
                     placeholder="Filter..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="h-9 w-48 sm:w-64 rounded-md border border-gray-200 bg-gray-50 pl-8 pr-3 text-xs outline-none focus:border-gray-300 focus:bg-white transition-all"
+                    className="h-9 w-full md:w-64 rounded-md border border-gray-200 bg-gray-50 pl-8 pr-3 text-xs outline-none focus:border-gray-300 focus:bg-white transition-all"
                   />
                </div>
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left">
+              <table className="w-full text-left min-w-[600px] md:min-w-0">
                 <thead className="bg-gray-50/50 text-[10px] uppercase tracking-wider text-gray-400 font-semibold">
                   <tr>
                     <th className="px-5 py-3">Patient</th>
@@ -305,7 +329,7 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
                       >
                         <td className="px-5 py-3">
                           <div className="flex items-center gap-3">
-                            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-[10px] font-bold text-gray-600 border border-white shadow-sm">
+                            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-[10px] font-bold text-gray-600 border border-white shadow-sm shrink-0">
                               {consultation.name.charAt(0)}
                             </div>
                             <div>
