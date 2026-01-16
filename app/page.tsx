@@ -81,7 +81,6 @@ export default function LandingPage() {
       <footer className="bg-secondary border-t border-white/10 py-12 text-center text-white/60 text-sm">
         <div className="container mx-auto px-4">
           <p>© {new Date().getFullYear()} Medicina Regenerativa Veterinaria BaDog. Todos los derechos reservados.</p>
-          <p className="mt-2">Director Médico: Dr. [Nombre] | Cédula #12345</p>
         </div>
       </footer>
     </main>
