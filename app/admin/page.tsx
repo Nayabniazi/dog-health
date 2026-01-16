@@ -13,7 +13,8 @@ import {
   MessageCircle,
   Clock,
   Menu,
-  X
+  X,
+  Key
 } from 'lucide-react';
 
 type Consultation = {
@@ -41,14 +42,16 @@ export default function AdminPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (email: string) => {
     setIsAuthenticated(true);
     localStorage.setItem('admin_auth', 'true');
+    localStorage.setItem('admin_email', email);
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
     localStorage.removeItem('admin_auth');
+    localStorage.removeItem('admin_email');
   };
 
   if (checkingAuth) return null;
@@ -68,7 +71,7 @@ export default function AdminPage() {
 
 // --- Login Component ---
 
-function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
+function LoginPage({ onLoginSuccess }: { onLoginSuccess: (email: string) => void }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -78,12 +81,25 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
     e.preventDefault();
     setLoading(true);
     setError('');
-    await new Promise(r => setTimeout(r, 600));
 
-    if (email === 'admin@gmail.com' && password === 'admin123') {
-      onLoginSuccess();
-    } else {
-      setError('Credenciales inválidas.');
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        onLoginSuccess(email);
+      } else {
+        setError(data.error || 'Credenciales inválidas.');
+      }
+    } catch (error) {
+      console.error(error);
+      setError('Error de conexión.');
+    } finally {
       setLoading(false);
     }
   };
@@ -163,6 +179,144 @@ function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => void }) {
   );
 }
 
+// --- Change Password Modal ---
+
+function ChangePasswordModal({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+
+    if (newPassword !== confirmPassword) {
+      setError('Las contraseñas no coinciden');
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      setError('La contraseña debe tener al menos 6 caracteres');
+      return;
+    }
+
+    setLoading(true);
+    const email = localStorage.getItem('admin_email') || 'admin@gmail.com';
+
+    try {
+      const res = await fetch('/api/auth/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, oldPassword, newPassword }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setSuccess('Contraseña actualizada correctamente');
+        setOldPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+        setTimeout(onClose, 2000);
+      } else {
+        setError(data.error || 'Error al cambiar la contraseña');
+      }
+    } catch (err) {
+      setError('Error de conexión');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl"
+      >
+        <div className="mb-4 flex items-center justify-between">
+          <h3 className="text-lg font-semibold text-gray-900">Cambiar Contraseña</h3>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-1.5">
+            <label className="text-xs font-medium text-gray-700">Contraseña Actual</label>
+            <input
+              type="password"
+              required
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+              className="block w-full rounded-lg border border-gray-200 bg-gray-50 py-2 px-3 text-sm outline-none transition-all focus:border-gray-400 focus:bg-white"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs font-medium text-gray-700">Nueva Contraseña</label>
+            <input
+              type="password"
+              required
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="block w-full rounded-lg border border-gray-200 bg-gray-50 py-2 px-3 text-sm outline-none transition-all focus:border-gray-400 focus:bg-white"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs font-medium text-gray-700">Confirmar Nueva Contraseña</label>
+            <input
+              type="password"
+              required
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="block w-full rounded-lg border border-gray-200 bg-gray-50 py-2 px-3 text-sm outline-none transition-all focus:border-gray-400 focus:bg-white"
+            />
+          </div>
+
+          {error && (
+            <div className="rounded-md bg-red-50 p-3 text-xs font-medium text-red-600">
+              {error}
+            </div>
+          )}
+
+          {success && (
+            <div className="rounded-md bg-green-50 p-3 text-xs font-medium text-green-600">
+              {success}
+            </div>
+          )}
+
+          <div className="flex justify-end gap-3 pt-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="rounded-lg bg-secondary px-4 py-2 text-sm font-medium text-white hover:bg-secondary/90 disabled:opacity-70"
+            >
+              {loading ? 'Guardando...' : 'Guardar Cambios'}
+            </button>
+          </div>
+        </form>
+      </motion.div>
+    </div>
+  );
+}
+
 // --- Dashboard Component ---
 
 function DashboardPage({ onLogout }: { onLogout: () => void }) {
@@ -170,6 +324,8 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
+  const [adminEmail, setAdminEmail] = useState('');
 
   const fetchConsultations = async (showLoading = false) => {
     if (showLoading) setLoading(true);
@@ -189,6 +345,7 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
   useEffect(() => {
     fetchConsultations(true);
     const interval = setInterval(() => fetchConsultations(false), 15000);
+    setAdminEmail(localStorage.getItem('admin_email') || 'admin@gmail.com');
     return () => clearInterval(interval);
   }, []);
 
@@ -200,6 +357,13 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
 
   return (
     <div className="flex h-screen bg-white">
+      {isChangePasswordOpen && (
+        <ChangePasswordModal 
+          isOpen={isChangePasswordOpen} 
+          onClose={() => setIsChangePasswordOpen(false)} 
+        />
+      )}
+
       {/* Mobile Sidebar Backdrop */}
       {isMobileMenuOpen && (
         <div 
@@ -242,6 +406,13 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
           <div className="pt-4 pb-2">
              <div className="px-3 text-[10px] font-semibold uppercase tracking-wider text-white/40">Configuración</div>
           </div>
+          <button 
+            onClick={() => setIsChangePasswordOpen(true)}
+            className="w-full flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/70 hover:bg-white/10 hover:text-white transition-colors"
+          >
+            <Key className="h-4 w-4 text-white/70" />
+            Cambiar Contraseña
+          </button>
           <button onClick={onLogout} className="w-full flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/70 hover:bg-white/10 hover:text-white transition-colors">
             <LogOut className="h-4 w-4 text-white/70" />
             Cerrar Sesión
@@ -251,11 +422,11 @@ function DashboardPage({ onLogout }: { onLogout: () => void }) {
         <div className="p-4 border-t border-white/10">
            <div className="flex items-center gap-3">
               <div className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-white font-medium text-xs">
-                 A
+                 {adminEmail.charAt(0).toUpperCase()}
               </div>
               <div className="flex flex-col overflow-hidden">
                  <span className="text-xs font-medium text-white truncate">Administrador</span>
-                 <span className="text-[10px] text-white/50 truncate">admin@gmail.com</span>
+                 <span className="text-[10px] text-white/50 truncate">{adminEmail}</span>
               </div>
            </div>
         </div>
