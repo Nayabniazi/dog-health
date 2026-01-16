@@ -53,14 +53,14 @@ export function Header() {
              e.preventDefault();
              window.scrollTo({ top: 0, behavior: 'smooth' });
           }}>
-             <div className="relative h-24 w-64 transition-transform group-hover:scale-105">
+             <div className="relative h-16 w-40 md:h-24 md:w-64 transition-transform group-hover:scale-105">
                 <Image 
                   src="/images/header-logo.png" 
                   alt="Mascotas BaDog Logo" 
                   fill
                   className="object-contain object-left"
                   priority
-                  sizes="(max-width: 768px) 120px, 150px"
+                  sizes="(max-width: 768px) 160px, 256px"
                 />
              </div>
           </Link>
