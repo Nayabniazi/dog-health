@@ -21,7 +21,7 @@ export function SuccessCases() {
                  {!isPlaying ? (
                    <>
                      <Image
-                       src="/images/hero-image.jpg"
+                       src="/images/thumbnail.png"
                        alt="Video de Caso de Éxito"
                        fill
                        className="object-cover opacity-60 transition-opacity group-hover:opacity-40"
